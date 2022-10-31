@@ -1,5 +1,6 @@
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import NavCounter from '../counter/universal-counter';
 
 const Header = (props) => {
     return(
@@ -12,6 +13,7 @@ const Header = (props) => {
                         <Link className='nav-link' to='/'>Home</Link>
                         <Link className='nav-link' to='/detail'>Task List</Link>
                         <Link className='nav-link' to='/about'>About us</Link>
+                        <Link className='nav-link'>Likes: <NavCounter /></Link>
                         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                         <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.2">
