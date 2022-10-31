@@ -1,3 +1,4 @@
+import { Container } from 'react-bootstrap';
 import Footer from './Footer';
 import Header from './Header';
 
@@ -5,7 +6,9 @@ const Layout = (props) => {
     return (
         <>
             <Header />
-            { props.children }
+                <Container>
+                    { props.children }
+                </Container>
             <Footer />
         </>
     )
