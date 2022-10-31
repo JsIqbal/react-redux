@@ -1,0 +1,17 @@
+Redux is a store =>
+
+1. Creating the store
+
+2. initialize Data in store
+
+3. Get Data from store
+
+4. Push Data in Store.
+
+--------
+single value change
+single value read
+object update
+object read
+array update 
+array read
