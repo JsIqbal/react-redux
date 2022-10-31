@@ -1,7 +1,5 @@
 import React, { useEffect, useState, } from 'react';
-import { Container } from 'react-bootstrap';
 import Layout from '../components/layout/Layout';
-import axios from 'axios';
 
 import { string, object } from "yup";
 import TaskList from '../components/tasks/Task-list';
