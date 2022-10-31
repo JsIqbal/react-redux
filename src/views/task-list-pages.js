@@ -5,6 +5,8 @@ import { string, object } from "yup";
 import TaskList from '../components/tasks/Task-list';
 import TaskCreate from '../components/tasks/task-create';
 import { getTaskData, storeTaskData } from '../services/task-service';
+import Counter from '../components/counter/counter.component';
+import CounterHit from '../components/counter/test-counter-hit';
 
 export const loginSchema = object().shape({
     email: string()
@@ -89,6 +91,14 @@ function TaskListPage() {
 
   return (
     <Layout>
+        <br/>
+        <br/>
+        <br/>
+        <Counter />
+        <br/>
+        <CounterHit />
+        <br/>
+        <br/>
         {
             isCreateMode && (
                 <TaskCreate 
