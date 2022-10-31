@@ -1,7 +1,6 @@
-import { useEffect, useState, } from 'react';
-// import { Formik, Form, Field, ErrorMessage } from 'formik';
+import React, { useEffect, useState, } from 'react';
 import { Table, Container, Navbar, Nav, NavDropdown, Form, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import Layout from './components/layout/Layout';
 
 import { string, object } from "yup";
 
@@ -16,94 +15,158 @@ export const loginSchema = object().shape({
 });
 
 function App() {
-    // const navigate = useNavigate();
     const [isCreateMode, setIsCreateMode] = useState(false);
+    const [tasks, setTasks] = useState([]);
+
+    const [email, setEmail] = useState("");
+    const [description, setDescription] = useState("");
+    const [priority, setPriority] = useState();
+    // const [isAdded, setIsAdded] = useState(false);
+
+    useEffect(() => {
+        const data = [
+            {
+                id: 1,
+                email: "example@mail.com",
+                description: "Test Description",
+                priority: "Low"
+            },
+            {
+                id: 2,
+                email: "example@mail.com",
+                description: "Test Description",
+                priority: "medium"
+            },
+            {
+                id: 3,
+                email: "example@mail.com",
+                description: "Test Description",
+                priority: "High"
+            }
+        ];
+
+        setTasks(data);
+    }, []);
+
+    const createTask = (e) => {
+        e.preventDefault();
+
+        if(email.length === 0) {
+            alert("Please give a title");
+            return false;
+        }
+        if(description.length === 0) {
+            alert("Please give a title");
+            return false;
+        }
+        if(priority.length === 0) {
+            alert("Please give a title");
+            return false;
+        }
+
+        // console.log("title : >>", title);
+        // console.log("description : >>", description);
+        // console.log("priority : >>", priority);
+
+        const taskItem = {
+            id: 100,
+            email: email,
+            description: description,
+            priority: priority
+        }
+        const taskData = tasks;
+        taskData.push(taskItem);
+        setTasks(taskData);
+        setEmail('');
+        setDescription('');
+        setPriority("");
+        // console.log(taskItem);
+
+        // console.log("TaskData: >>", taskData);
+        // console.log("tasks: >>", tasks);
+    }
+
+
   return (
     <>
-    <Navbar bg="light" expand="lg">
-    <Container>
-
-
-
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">
-                Another action
-            </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/3.4">
-                Separated link
-            </NavDropdown.Item>
-            </NavDropdown>
-        </Nav>
-        </Navbar.Collapse>
-    </Container>
-</Navbar>
-    <Container className='mt-2'>
-    {
-        isCreateMode && (
-            <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Title</Form.Label>
-              <Form.Control type="email" placeholder="name@example.com" />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-              <Form.Label>Description</Form.Label>
-              <Form.Control as="textarea" rows={3} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-              <Form.Label>username</Form.Label>
-              <Form.Control type='text' />
-            </Form.Group>
-            <Form.Group controlId="exampleForm.ControlSelect1">
-          <Form.Label>Select Task Priority</Form.Label>
-          <Form.Control as="select">
-            <option value="High">High</option>
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-          </Form.Control>
-        </Form.Group>
-            <Button clasName="btn btn-primary" type="submit" >submit</Button>
-          </Form>
-        )
-    }
+        <Layout>
+            <Container className='mt-2'>
+                {
+                    isCreateMode && (
+                        <Form onSubmit={(e) => createTask(e)}>
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control 
+                                    value={email} 
+                                    onChange={((e) => setEmail(e.target.value))} 
+                                    type="email" placeholder="name@example.com" 
+                                />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                                <Form.Label>Description</Form.Label>
+                                <Form.Control 
+                                    value={description} 
+                                    onChange={((e) => setDescription(e.target.value))} 
+                                    as="textarea" rows={3} 
+                                />
+                            </Form.Group>
+                            <Form.Group controlId="exampleForm.ControlSelect1">
+                                <select 
+                                    className="form-control" 
+                                    value={priority} 
+                                    onChange={((e) => setPriority(e.target.value))}
+                                >
+                                    <option value="Select Task Priority">Select Task Priority</option>
+                                    <option value="High">High</option>
+                                    <option value="Low">Low</option>
+                                    <option value="Medium">Medium</option>
+                                </select>
+                            </Form.Group>
+                            <Button className="btn btn-primary" type="submit" >submit</Button>
+                        </Form>
+                    )
+                }
 
                 <div className='ms-auto col-lg-5 text-end'>
                     <div>
-                    <button onClick={()=> setIsCreateMode(isCreateMode ? false : true)} className='text-align-right btn btn-primary'><i class="fa-solid fa-plus"></i></button>
+                        <button 
+                            onClick={()=> setIsCreateMode(isCreateMode ? false : true)} 
+                            className='text-align-right btn btn-primary'
+                        >
+                            <i className="fa-solid fa-plus"></i>
+                        </button>
                     </div>
                 </div>
-        <Table striped bordered hover className='mt-4'>
-            <thead>
-                <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Priority</th>
-                <th>Edid/Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>High</td>
-                <td>
-                    <button className='btn btn-circle'><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button className='btn btn-circle'><i class="fa-solid fa-delete-left"></i></button>
-                </td>
-                </tr>
-            </tbody>
-        </Table>
-    </Container>
+
+                <Table striped bordered hover className='mt-4'>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Email</th>
+                            <th>Description</th>
+                            <th>Priority</th>
+                            <th>Edit/Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            tasks.map((item, index) => (
+                                <tr key={item.id}>
+                                    <td>{index+1}</td>
+                                    <td>{item.email}</td>
+                                    <td>{item.description}</td>
+                                    <td>{item.priority}</td>
+                                    <td>
+                                        <button className='btn btn-circle'><i className="fa-solid fa-pen-to-square"></i></button>
+                                        <button className='btn btn-circle'><i className="fa-solid fa-delete-left"></i></button>
+                                    </td>
+                                </tr>
+                            ))
+                        }
+                    </tbody>
+                </Table>
+            </Container>
+        </Layout>
     </>
   );
 }
