@@ -11,3 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.edit {
+    color: rgb(46, 46, 247);
+}
+
+.delete {
+    color: rgb(255, 68, 68);
+}
+
+.btn-common {
+    padding: 0!important;
+    margin-right: 15px!important;
+}
