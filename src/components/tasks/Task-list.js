@@ -18,6 +18,7 @@ const TaskList = ({ tasks, setIsCreateMode}) => {
             <Table striped bordered hover className='mt-4'>
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Id</th>
                         <th>Email</th>
                         <th>Description</th>

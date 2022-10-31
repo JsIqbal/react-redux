@@ -1,10 +1,12 @@
 import React, { useEffect, useState, } from 'react';
 import { Container } from 'react-bootstrap';
 import Layout from '../components/layout/Layout';
+import axios from 'axios';
 
 import { string, object } from "yup";
 import TaskList from '../components/tasks/Task-list';
 import TaskCreate from '../components/tasks/task-create';
+import { getTaskData, storeTaskData } from '../services/task-service';
 
 export const loginSchema = object().shape({
     email: string()
@@ -24,31 +26,19 @@ function TaskListPage() {
     const [priority, setPriority] = useState();
 
     useEffect(() => {
-        const data = [
-            {
-                id: 1,
-                email: "example@mail.com",
-                description: "Test Description",
-                priority: "Low"
-            },
-            {
-                id: 2,
-                email: "example@mail.com",
-                description: "Test Description",
-                priority: "medium"
-            },
-            {
-                id: 3,
-                email: "example@mail.com",
-                description: "Test Description",
-                priority: "High"
-            }
-        ];
-
-        setTasks(data);
+        initializeData();
     }, []);
 
-    const createTask = (e) => {
+    const initializeData = async () => {
+        const data = await getTaskData();
+        data.sort(); // ascending war sort.
+        data.reverse(); // reversing
+        setTasks(data);
+        
+        // console.log("Data from UI >>", data);
+    }
+
+    const createTask = async (e) => {
         e.preventDefault();
 
         if(email.length === 0) {
@@ -64,20 +54,39 @@ function TaskListPage() {
             return false;
         }
 
+        // const taskItem = {
+        //     id: 100,
+        //     email: email,
+        //     description: description,
+        //     priority: priority
+        // }
+
         const taskItem = {
-            id: 100,
-            email: email,
-            description: description,
-            priority: priority
+            Title: email,
+            Description: description,
+            Priority: priority
+        }
+        // console.log(taskItem);
+
+        // call api and save to database
+        const isAdded = await storeTaskData(taskItem);
+        console.log(isAdded);
+
+        if (isAdded) {
+            setEmail('');
+            setDescription('');
+            setPriority("");
+            await initializeData();
+        }
+        else {
+            alert("Something went wrong");
         }
 
-        const taskData = tasks;
-        // taskData.push(taskItem); // to show task on bottom
-        taskData.unshift(taskItem); // to show task on top
-        setTasks(taskData);
-        setEmail('');
-        setDescription('');
-        setPriority("");
+        // const taskData = tasks;
+        // // taskData.push(taskItem); // to show task on bottom
+        // taskData.unshift(taskItem); // to show task on top
+        // setTasks(taskData);
+        
     }
 
   return (
