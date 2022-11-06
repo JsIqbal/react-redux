@@ -5,9 +5,9 @@ const Counter = () => {
   
     return (
         <div>
-            {count}
+            { count }
         </div>
     )
 }
 
-export default Counter
+export default Counter;
