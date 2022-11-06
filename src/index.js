@@ -1,36 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './styles/index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-// // Initialize a store object
-// const InitializeState = {
-//     counter: 0,
-// }
-
-// // Do jobs on changes any action
-// function CounterReducer (state = InitializeState, action) {
-//     switch (action.type) {
-//         case 'GET_COUNTER':
-            
-//             return {
-//                 ...state,
-//             }
-//             break;
-//         default:
-//             break;
-//     }
-//     return state;
-// }
-
-// // Set a store
-// let store = configureStore(CounterReducer);
-
-
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -38,8 +12,6 @@ root.render(
     <App />
   </Provider>
 );
-
-reportWebVitals();
 
 
 

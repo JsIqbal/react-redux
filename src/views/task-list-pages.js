@@ -1,22 +1,11 @@
 import React, { useEffect, useState, } from 'react';
 import Layout from '../components/layout/Layout';
 
-import { string, object } from "yup";
 import TaskList from '../components/tasks/Task-list';
 import TaskCreate from '../components/tasks/task-create';
 import { getTaskData, storeTaskData } from '../services/task-service';
 import Counter from '../components/counter/counter.component';
 import CounterHit from '../components/counter/test-counter-hit';
-
-export const loginSchema = object().shape({
-    email: string()
-        .required("This field must not be empty")
-        .min(2, "This field minimum 2 character long."),
-    password: string()
-        .required("This field must not be empty")
-        .min(2, "This field minimum 2 character long.")
-        .max(25,"This field minimum 25 character long."),
-});
 
 function TaskListPage() {
     const [tasks, setTasks] = useState([]);
@@ -94,9 +83,13 @@ function TaskListPage() {
         <br/>
         <br/>
         <br/>
-        <Counter />
+        {/* <div className='col-lg-2 me-auto ms-auto text-center'>
+            <Counter />
+        </div> */}
         <br/>
-        <CounterHit />
+        <div className='col-lg-4 me-auto ms-auto text-center'>
+            <CounterHit />
+        </div>
         <br/>
         <br/>
         {
