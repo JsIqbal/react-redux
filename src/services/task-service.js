@@ -5,7 +5,6 @@ export const getTaskData = async () => {
     await axios.get("https://todo-app37.herokuapp.com/loadTodo")
         .then(res => {
             data = res.data;
-            // console.log("Data from Service >>", data);
         });
         return data;
         

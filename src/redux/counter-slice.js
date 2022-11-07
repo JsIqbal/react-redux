@@ -27,8 +27,6 @@ export const counterSlice = createSlice({
             }
         },
         update: (state, action) => {
-        //    console.log(state.value);
-        //    console.log(action.payload);
             state.value = parseInt(action.payload);
         },
         incSpecific: (state, action) => {
@@ -37,7 +35,6 @@ export const counterSlice = createSlice({
     },
 })
 
-// each case under reducers becomes an action
 export const { increase, decrease, update, incSpecific } = counterSlice.actions;
 
 export default counterSlice.reducer;

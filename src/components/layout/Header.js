@@ -1,8 +1,11 @@
-import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+
 import Counter from '../counter/counter.component';
 
 const Header = (props) => {
+    const tasks = useSelector(state => state.task.tasks)
     return(
         <Navbar bg="light" expand="lg">
             <Container>
@@ -11,7 +14,10 @@ const Header = (props) => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Link className='nav-link' to='/'>Home</Link>
-                        <Link className='nav-link' to='/detail'>Task List</Link>
+                        <Link className='nav-link' to='/detail'>
+                            Task List
+                            <span style={{color: "red"}} className='badge badge-danger'>{tasks.length}</span>
+                        </Link>
                         <Link className='nav-link' to='/about'>About us</Link>
                         <Link className='nav-link'>{Counter()}</Link>
                         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
