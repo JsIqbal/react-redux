@@ -1,6 +1,50 @@
+import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { getTasks } from '../../redux/table-slice';
+import { getTaskData, storeTaskData } from '../../services/task-service';
 
-const TaskCreate = ({ createTask, email, setEmail, description, setDescription, priority, setPriority }) => {
+const TaskCreate = () => {
+    const dispatch = useDispatch();
+    const tasks = useSelector(state => state.task.tasks);
+
+    const [email, setEmail] = useState('');
+    const [description, setDescription] = useState('');
+    const [priority, setPriority] = useState('');
+
+    
+    const createTask = async (e) => {
+        e.preventDefault();
+
+        if(email.length === 0) {
+            alert("Please give a title");
+            return false;
+        }
+        if(description.length === 0) {
+            alert("Please give a title");
+            return false;
+        }
+        if(priority.length === 0) {
+            alert("Please give a title");
+            return false;
+        }
+
+        const taskItem = {
+            Title: email,
+            Description: description,
+            Priority: priority
+        }
+
+        const isAdded = await storeTaskData(taskItem);
+
+        const data = await getTaskData();
+        data.sort();
+        data.reverse();
+        dispatch(getTasks(data));
+    }
+
+    console.log('tasks >> ', tasks);
+
     return (
         <Form onSubmit={(e) => createTask(e)}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">

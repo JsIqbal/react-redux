@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { decrease, increase, update, incSpecific } from '../../redux/counterSlice';
+import { decrease, increase, update, incSpecific } from '../../redux/counter-slice';
 import Counter from './counter.component';
 
 const CounterHit = () => {
@@ -8,7 +8,7 @@ const CounterHit = () => {
     const dispatch = useDispatch();
 
     const [number, setNumber] = useState(0);
-  
+
     return (
         <div>
             <div className='row'>
