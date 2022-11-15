@@ -23,7 +23,7 @@ export const counterSlice = createSlice({
 
             }
             else {
-            state.value--
+                state.value--
             }
         },
         update: (state, action) => {
