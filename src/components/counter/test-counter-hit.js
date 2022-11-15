@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { decrease, increase, update, incSpecific } from '../../redux/counter-slice';
+import { useDispatch } from 'react-redux';
+
+import { decrease, increase, update } from '../../redux/reducers/counter-slice';
+
 import Counter from './counter.component';
 
 const CounterHit = () => {
-    const userList = useSelector((state) => state.counter.value);
     const dispatch = useDispatch();
 
     const [number, setNumber] = useState(0);

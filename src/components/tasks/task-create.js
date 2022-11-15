@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTasks } from '../../redux/table-slice';
-import { getTaskData, storeTaskData } from '../../services/task-service';
+
+import { getTaskDataAction, storeTaskDataAction } from '../../redux/actions/task-action';
 
 const TaskCreate = () => {
     const dispatch = useDispatch();
@@ -16,15 +16,15 @@ const TaskCreate = () => {
     const createTask = async (e) => {
         e.preventDefault();
 
-        if(email.length === 0) {
+        if (email.length === 0) {
             alert("Please give a title");
             return false;
         }
-        if(description.length === 0) {
+        if (description.length === 0) {
             alert("Please give a title");
             return false;
         }
-        if(priority.length === 0) {
+        if (priority.length === 0) {
             alert("Please give a title");
             return false;
         }
@@ -35,12 +35,9 @@ const TaskCreate = () => {
             Priority: priority
         }
 
-        const isAdded = await storeTaskData(taskItem);
+        dispatch(storeTaskDataAction(taskItem));
 
-        const data = await getTaskData();
-        data.sort();
-        data.reverse();
-        dispatch(getTasks(data));
+        dispatch(getTaskDataAction());
     }
 
     console.log('tasks >> ', tasks);
