@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getTasks } from "../reducers/table-slice";
+import { getTasks } from "../reducers/table/table-slice";
 
 export const getTaskDataAction = () => (dispatch) => {
     axios.get("https://todo-app37.herokuapp.com/loadTodo")

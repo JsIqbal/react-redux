@@ -1,9 +1,6 @@
 import { configureStore, applyMiddleware, compose } from '@reduxjs/toolkit';
 import thunkmiddleware from 'redux-thunk';
 
-import counterReducer  from '../reducers/counter-slice';
-import tableReducer from '../reducers/table-slice';
-
 import rootReducer from '../reducers/root-reducer';
 
 const middlewares = [thunkmiddleware];
