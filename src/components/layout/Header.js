@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import Counter from '../counter/counter.component';
 
 const Header = (props) => {
-    const tasks = useSelector(state => state.task.tasks)
+    const tasks = useSelector(state => state.tableSlice.tasks)
     return(
         <Navbar bg="light" expand="lg">
             <Container>

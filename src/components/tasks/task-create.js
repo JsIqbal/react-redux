@@ -6,7 +6,7 @@ import { getTaskDataAction, storeTaskDataAction } from '../../redux/actions/task
 
 const TaskCreate = () => {
     const dispatch = useDispatch();
-    const tasks = useSelector(state => state.task.tasks);
+    const tasks = useSelector(state => state.tableSlice.tasks);
 
     const [email, setEmail] = useState('');
     const [description, setDescription] = useState('');

@@ -4,6 +4,8 @@ import thunkmiddleware from 'redux-thunk';
 import counterReducer  from '../reducers/counter-slice';
 import tableReducer from '../reducers/table-slice';
 
+import rootReducer from '../reducers/root-reducer';
+
 const middlewares = [thunkmiddleware];
 
 const middlewareEnhancer = applyMiddleware(...middlewares);
@@ -12,10 +14,7 @@ const composedEnhancers = compose(...enhancers);
 
 export default function Store (previousState) {
     const store = configureStore({
-        reducer: {
-            counter: counterReducer,
-            task: tableReducer
-        }
+        reducer: rootReducer
     }, previousState,  composedEnhancers);
     return store;
 };
