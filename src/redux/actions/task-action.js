@@ -9,13 +9,11 @@ export const getTaskDataAction = () => (dispatch) => {
             data.reverse();
             dispatch(getTasks(data));
         });
-}
+};
 
 export const storeTaskDataAction = (taskItem) => (dispatch) => {
-    let isAdded = false;
     axios.post("https://todo-app37.herokuapp.com/addTodo", taskItem)
         .then(res => {
-            isAdded = res.data;
             dispatch(getTaskDataAction());
         });
-}
+};

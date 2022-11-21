@@ -10,7 +10,7 @@ import { getTaskDataAction } from '../redux/actions/task-action';
 
 function TaskListPage() {
     const dispatch = useDispatch();
-    const tasks = useSelector(state => state.task.tasks);
+    const tasks = useSelector(state => state.tableSlice.tasks);
     
     const [isCreateMode, setIsCreateMode] = useState(false);
 
