@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { decrease, increase, update } from '../../redux/reducers/counter-slice';
+import { decrease, increase, update } from '../../redux/reducers/counter/counter-slice';
 
 import Counter from './counter.component';
 
