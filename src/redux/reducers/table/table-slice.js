@@ -5,6 +5,7 @@ export const tableSlice = createSlice({
     initialState: {
         tasks: [],
         taskForm: {
+            _id: null,
             email: "",
             description: "",
             priority: "" 
@@ -31,10 +32,17 @@ export const tableSlice = createSlice({
                 ...state,
                 taskForm
             };
-        }
+        },
+
+        getTaskDetail: (state, action) => {
+            return {
+                ...state,
+                taskForm: action.payload
+            };
+        },
     },
 })
 
-export const { createRecord, getTasks, changeTaskInput } = tableSlice.actions;
+export const { createRecord, getTasks, changeTaskInput, getTaskDetail } = tableSlice.actions;
 
 export default tableSlice.reducer;
